@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="PrefCLM: Enhancing Preference-based Reinforcement Learning with Crowdsourced LLMs.">
+  <meta name="keywords" content="PrefCLM">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PrefCLM: Enhancing Preference-based Reinforcement Learning with Crowdsourced LLMs</title>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">PrefCLM: Enhancing Preference-based Reinforcement Learning with Crowdsourced LLMs</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="#">Ruiqi Wang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Dezhong Zhao</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="#">Ziqin Yuan</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Ike Obi</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Byung-Cheol Min</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>SMART Laboratory, Department of Computer and Information Technology, Purdue University, West Lafayette, IN, USA</span>
+            <span class="author-block"><sup>2</sup>College of Mechanical and Electrical Engineering, Beijing University of Chemical Technology, Beijing, China</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+        <p></p><img src="static/images/prefCLM_concept.PNG"> <!-- To .gif format--></p>
+
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-3">Abstract</h3>
+        <div class="content has-text-justified">
+            <p>
+              Preference-based reinforcement learning (PbRL) is emerging as a promising approach to 
+              teaching robots through human comparative feedback, sidestepping the need for complex 
+              reward engineering. However, the substantial volume of feedback required in existing PbRL 
+              methods often lead to reliance on synthetic feedback generated by scripted teachers. 
+              While efficient, this approach necessitates intricate reward engineering again and 
+              struggles to adapt to the nuanced preferences particular to human-robot interaction (HRI) 
+              scenarios.
+              To address these challenges, we introduce PrefCLM, a novel framework that utilizes 
+              crowdsourced large language models (LLMs) as simulated teachers in PbRL. 
+              We utilize Dempster-Shafer Theory (DST) to fuse individual preferences from 
+              multiple LLM agents at the score level, efficiently leveraging their diversity 
+              and collective intelligence. We also introduce a human-in-the-loop pipeline that 
+              facilitates collective refinements based on user interactive feedback. 
+              Experimental results across various general RL tasks show that PrefCLM achieves 
+              competitive performance compared to traditional scripted teachers and excels in 
+              facilitating more more natural and efficient behaviors.
+              A real-world user study of PrefCLM (N=10) further demonstrates its capability to tailor 
+              robot behaviors to individual user preferences, significantly enhancing user satisfaction 
+              in HRI scenarios. 
+          </p>
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!--/ Abstract. -->
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-three-fifths">
+        <h3 class="title is-3">Video</h3>
+        <p>Coming soon!</p>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h3 class="subtitle has-text-centered">
+        <p></p><img src="static/images/prefCLM_overview.PNG"> <!-- To .gif format--></p>
+      </h3>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Results. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-3">How PrefCLM Works</h3>
+        <div class="content has-text-justified">
+          <p>
+            PrefCLM operates by leveraging the collective intelligence of multiple LLM agents to evaluate robot behaviors:
+          </p>
+          <ol type="a" style="font-weight: bold;">
+            <li> Given task-specific contextual information and prompts, multiple code-based evaluation functions are
+              sampled from crowd LLM agents.</li>
+            <li> A cosine similarity check module then filters the sampled evaluation functions, selecting those that align
+              with few-shot expert preferences within a specified tolerance.</span></li>
+            <li> Evaluative scores are continuously assigned by these selected evaluation
+              functions to pairs of robot trajectories. These scores are aggregated through Dempster-Shafer Theory (DST) fusion to form crowdsourced preferences,
+              which are used for the reward learning in PbRL.</li>
+            <li>Additionally, crowd LLM agents can also collectively refine their evaluation functions
+              based on user interactive inputs given periodically in HRI scenarios.</li>
+          </ol>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Results. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-3">Interactive Results</h3>
+        <div class="content has-text-justified">
+          <p>
+            We evaluated PrefCLM on various locomotion and manipulation tasks, comparing its performance against traditional scripted teachers and other baselines.
+            These graphs demonstrate that PrefCLM achieves comparable or superior performance to expert-tuned scripted teachers across various tasks, particularly excelling in manipulation tasks like Button Press and Door Unlock.
+          </p>
+          <p></p>
+          <img src="static/images/prefCLM_result1.PNG">
+          <p></p>
+          
+          <p>
+            This visual comparison below highlights how PrefCLM leads to more natural and efficient robot behaviors compared to traditional methods.
+            Locomotion behaviors learned by Scripted Teachers (top) and PrefCLM (bottom) on the Cheetah Run task.
+          </p>
+          <p></p>
+          <img src="static/images/prefCLM_teachers.PNG">
+          <p></p>
+          <p>The ablation results below demonstrate the benefits of our crowdsourcing approach and the effectiveness of DST fusion in managing complexities and conflicts among LLM agents.
+            We conducted ablation studies to investigate the impact of crowdsourcing and DST fusion mechanisms within our framework</p>
+          <img src="static/images/prefCLM_ablation.PNG">
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h3 class="title">Acknowledgement</h3>
+    <p>We thank the participants that contributed to the human evaluation tests.</p>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h3 class="title">BibTeX</h3>
+    <pre><code>@inproceedings{prefclm2024,
+      title={PrefCLM: Enhancing Preference-based Reinforcement Learning with Crowdsourced Large Language Models},
+      author={Author1 and Author2 and Author3},
+      booktitle={Name of conference goes here},
+      year={2024}
+    }
+</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="#">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="#" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
