@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="PrefCLM: Enhancing Preference-based Reinforcement Learning with Crowdsourced LLMs.">
+  <meta name="description" content="PrefCLM: Enhancing Preference-based Reinforcement Learning with Crowdsourced LLMs.">
   <meta name="keywords" content="PrefCLM">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PrefCLM: Enhancing Preference-based Reinforcement Learning with Crowdsourced LLMs</title>
 
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
 
@@ -27,101 +25,103 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
+
 <body>
 
 
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">PrefCLM: Enhancing Preference-based Reinforcement Learning with Crowdsourced LLMs</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="#">Ruiqi Wang</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="#">Dezhong Zhao</a><sup>1,2</sup>,</span>
-            <span class="author-block">
-              <a href="#">Ziqin Yuan</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="#">Ike Obi</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="#">Byung-Cheol Min</a><sup>1</sup>,
-            </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>SMART Laboratory, Department of Computer and Information Technology, Purdue University, West Lafayette, IN, USA</span>
-            <span class="author-block"><sup>2</sup>College of Mechanical and Electrical Engineering, Beijing University of Chemical Technology, Beijing, China</span>
-          </div>
-
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
           <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2407.08213"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
+            <h1 class="title is-1 publication-title">PrefCLM: Enhancing Preference-based Reinforcement Learning with
+              Crowdsourced LLMs</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="#">Ruiqi Wang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="#">Dezhong Zhao</a><sup>1,2</sup>,</span>
+              <span class="author-block">
+                <a href="#">Ziqin Yuan</a><sup>1</sup>,
               </span>
-              <!-- Video Link. -->
-              <span class="link-block">
-                <a href="https://youtu.be/0vyekC2fqrY"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
+              <span class="author-block">
+                <a href="#">Ike Obi</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="#">Byung-Cheol Min</a><sup>1</sup>,
               </span>
             </div>
 
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>SMART Laboratory, Department of Computer and Information
+                Technology, Purdue University, West Lafayette, IN, USA</span>
+              <span class="author-block"><sup>2</sup>College of Mechanical and Electrical Engineering, Beijing
+                University of Chemical Technology, Beijing, China</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2407.08213" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="https://youtu.be/0vyekC2fqrY" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h3 class="title is-3">Abstract</h3>
-        <div class="content has-text-justified">
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h3 class="title is-3">Abstract</h3>
+          <div class="content has-text-justified">
             <p>
-              Preference-based reinforcement learning (PbRL) is emerging as a promising approach to 
-              teaching robots through human comparative feedback, sidestepping the need for complex 
-              reward engineering. However, the substantial volume of feedback required in existing PbRL 
-              methods often lead to reliance on synthetic feedback generated by scripted teachers. 
-              While efficient, this approach necessitates intricate reward engineering again and 
-              struggles to adapt to the nuanced preferences particular to human-robot interaction (HRI) 
+              Preference-based reinforcement learning (PbRL) is emerging as a promising approach to
+              teaching robots through human comparative feedback, sidestepping the need for complex
+              reward engineering. However, the substantial volume of feedback required in existing PbRL
+              methods often lead to reliance on synthetic feedback generated by scripted teachers.
+              While efficient, this approach necessitates intricate reward engineering again and
+              struggles to adapt to the nuanced preferences particular to human-robot interaction (HRI)
               scenarios.
-              To address these challenges, we introduce PrefCLM, a novel framework that utilizes 
-              crowdsourced large language models (LLMs) as simulated teachers in PbRL. 
-              We utilize Dempster-Shafer Theory (DST) to fuse individual preferences from 
-              multiple LLM agents at the score level, efficiently leveraging their diversity 
-              and collective intelligence. We also introduce a human-in-the-loop pipeline that 
-              facilitates collective refinements based on user interactive feedback. 
-              Experimental results across various general RL tasks show that PrefCLM achieves 
-              competitive performance compared to traditional scripted teachers and excels in 
+              To address these challenges, we introduce PrefCLM, a novel framework that utilizes
+              crowdsourced large language models (LLMs) as simulated teachers in PbRL.
+              We utilize Dempster-Shafer Theory (DST) to fuse individual preferences from
+              multiple LLM agents at the score level, efficiently leveraging their diversity
+              and collective intelligence. We also introduce a human-in-the-loop pipeline that
+              facilitates collective refinements based on user interactive feedback.
+              Experimental results across various general RL tasks show that PrefCLM achieves
+              competitive performance compared to traditional scripted teachers and excels in
               facilitating more more natural and efficient behaviors.
-              A real-world user study of PrefCLM (N=10) further demonstrates its capability to tailor 
-              robot behaviors to individual user preferences, significantly enhancing user satisfaction 
-              in HRI scenarios. 
-          </p>
-          <p></p>
+              A real-world user study of PrefCLM (N=10) further demonstrates its capability to tailor
+              robot behaviors to individual user preferences, significantly enhancing user satisfaction
+              in HRI scenarios.
+            </p>
+            <p></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
     <!--/ Abstract. -->
     <!-- Paper video. -->
     <!-- <div class="columns is-centered has-text-centered">
@@ -131,202 +131,252 @@
       </div>
     </div> -->
     <!--/ Paper video. -->
-  </div>
-</section>
-
-
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video id="teaser" autoplay muted loop playsinline height="50%">
-        <source src="./static/videos/concept.mp4"
-                type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">
-      </h2>
     </div>
-  </div>
-</section>
+  </section>
 
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Results. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h3 class="title is-3">How PrefCLM Works</h3>
-        <div class="content has-text-justified">
-          <p>
-            PrefCLM operates by leveraging the collective intelligence of multiple LLM agents to evaluate robot behaviors:
-          </p>
-          <ol type="a">
-            <li> Given task-specific contextual information and prompts, multiple code-based evaluation functions are
-              sampled from crowd LLM agents.</li>
-            <li> A cosine similarity check module then filters the sampled evaluation functions, selecting those that align
-              with few-shot expert preferences within a specified tolerance.</span></li>
-            <li> Evaluative scores are continuously assigned by these selected evaluation
-              functions to pairs of robot trajectories. These scores are aggregated through Dempster-Shafer Theory (DST) fusion to form crowdsourced preferences,
-              which are used for the reward learning in PbRL.</li>
-            <li>Additionally, crowd LLM agents can also collectively refine their evaluation functions
-              based on user interactive inputs given periodically in HRI scenarios.</li>
-          </ol>
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video id="teaser" autoplay muted loop playsinline height="50%">
+          <source src="./static/videos/prefclm_crp2.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">
+          <span class="dnerf">
+        </h2>
+      </div>
+    </div>
+  </section>
 
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe width="800" height="450" src="https://www.youtube.com/embed/4VC17Ri-AUQ?si=nAIca-QjzZXZDCWh?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Results. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h3 class="title is-3">How PrefCLM Works</h3>
+          <div class="content has-text-justified">
+            <p>
+              PrefCLM operates by leveraging the collective intelligence of multiple LLM agents to evaluate robot
+              behaviors:
+            </p>
+            <ol type="a">
+              <li> Given task-specific contextual information and prompts, multiple code-based evaluation functions are
+                sampled from crowd LLM agents.</li>
+              <li> A cosine similarity check module then filters the sampled evaluation functions, selecting those that
+                align
+                with few-shot expert preferences within a specified tolerance.</span></li>
+              <li> Evaluative scores are continuously assigned by these selected evaluation
+                functions to pairs of robot trajectories. These scores are aggregated through Dempster-Shafer Theory
+                (DST) fusion to form crowdsourced preferences,
+                which are used for the reward learning in PbRL.</li>
+              <li>Additionally, crowd LLM agents can also collectively refine their evaluation functions
+                based on user interactive inputs given periodically in HRI scenarios.</li>
+            </ol>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper video. -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video id="teaser" autoplay muted loop playsinline height="50%">
+          <source src="./static/videos/PrefCLM_V2_Illustration_trm.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">
+          <span class="dnerf">
+        </h2>
       </div>
     </div>
     <!--/ Paper video. -->
-  </div>
-</section>
+  </section>
 
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Results. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h3 class="title is-3">Experiments & Results: General RL Tasks</h3>
-        <div class="content has-text-justified">
-          <p>
-            We tested PrefCLM on a range of standard RL benchmarks, including locomotion tasks 
-            (Walker, Cheetah, Quadruped) from the DeepMind Control Suite and manipulation tasks 
-            (Button Press, Door Unlock, Drawer Open) from Meta-World. We compared our method against two 
-            baselines: expert-tuned Scripted Teachers and PrefEVO, a single-LLM approach adapted from recent work on reward design.
-          </p>
-          <p>Results from our analysis showed the following key findings:</p>
-          <ol type="a">
-            <li>PrefCLM achieved comparable or superior performance to expert-tuned Scripted Teachers across most tasks</li>
-            <li> PrefCLM outperformed PrefEVO, demonstrating the benefits of its crowdsourcing approach</span></li>
-            <li> Few-shot mode of PrefCLM showed advantages over zero-shot, especially for complex tasks</li>
-            <li>Ablation studies revealed benefits of increasing crowd size and using DST fusion over majority voting</li>
-          </ol>
-          <p></p>
-          <img src="static/images/prefCLM_result1.PNG">
-          <p></p>
-          
-          <p>
-            This visual comparison below highlights how PrefCLM leads to more natural and efficient robot behaviors compared to traditional methods.
-            Locomotion behaviors learned by Scripted Teachers (left) and PrefCLM (right) on the Cheetah Run task.
-          </p>
-          <p></p>
-          <section class="hero teaser">
-            <div class="container is-max-desktop">
-              <div class="hero-body">
-                <video id="teaser" autoplay muted loop playsinline height="50%">
-                  <source src="./static/videos/PrefCLM_V2_locomotion2.mp4"
-                          type="video/mp4">
-                </video>
-                <h2 class="subtitle has-text-centered">
-                  <span class="dnerf">
-                </h2>
-              </div>
-            </div>
-          </section>
-          <p></p>
-          <p>We conducted ablation studies to investigate the impact of crowdsourcing and DST fusion mechanisms within our framework. The ablation results below demonstrate the benefits of our crowdsourcing approach and the effectiveness of DST fusion in managing complexities and conflicts among LLM agents.
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Results. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h3 class="title is-3">Experiments & Results: General RL Tasks</h3>
+          <div class="content has-text-justified">
+            <p>
+              We tested PrefCLM on a range of standard RL benchmarks, including locomotion tasks
+              (Walker, Cheetah, Quadruped) from the DeepMind Control Suite and manipulation tasks
+              (Button Press, Door Unlock, Drawer Open) from Meta-World. We compared our method against two
+              baselines: expert-tuned Scripted Teachers and PrefEVO, a single-LLM approach adapted from recent work on
+              reward design.
             </p>
-          <img src="static/images/prefCLM_ablation.PNG">
-          <p></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <p>Results from our analysis showed the following key findings:</p>
+            <ol type="a">
+              <li>PrefCLM achieved comparable or superior performance to expert-tuned Scripted Teachers across most
+                tasks</li>
+              <li> PrefCLM outperformed PrefEVO, demonstrating the benefits of its crowdsourcing approach</span></li>
+              <li> Few-shot mode of PrefCLM showed advantages over zero-shot, especially for complex tasks</li>
+              <li>Ablation studies revealed benefits of increasing crowd size and using DST fusion over majority voting
+              </li>
+            </ol>
+            <p></p>
+            <img src="static/images/prefCLM_result1.PNG">
+            <p></p>
 
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Results. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h3 class="title is-3">Experiments & Results: Real World User Study</h3>
-        <div class="content has-text-justified">
-          <p>
-            To assess PrefCLM's ability to personalize robot behaviors and enhance user satisfaction in realistic human-robot interaction scenarios, 
-            we conducted a user study with 10 participants on a robotic feeding task. 
-            We compared PrefCLM (equipped with our Human-In-The-Loop module) against PrefEVO and a pre-trained baseline policy.
-          </p>
-          <p>Results from our analysis showed the following key findings:</p>
-          <ol type="a">
-            <li>PrefCLM achieved higher user satisfaction and personalization ratings compared to baselines</li>
-            <li>Qualitative feedback from the participants indicated that PrefCLM produced more natural and personalized robot behaviors</li>
-          </ol>
-          <p></p>
-          <section class="hero teaser">
-            <div class="container is-max-desktop">
-              <div class="hero-body">
-                <video id="teaser" autoplay muted loop playsinline height="50%">
-                  <source src="./static/videos/PrefCLM_V2 - user_study2.mp4"
-                          type="video/mp4">
-                </video>
-                <h2 class="subtitle has-text-centered">
-                  <span class="dnerf">
-                </h2>
+            <p>
+              This visual comparison below highlights how PrefCLM leads to more natural and efficient robot behaviors
+              compared to traditional methods.
+              Locomotion behaviors learned by Scripted Teachers (left) and PrefCLM (right) on the Cheetah Run task.
+            </p>
+            <p></p>
+            <section class="hero teaser">
+              <div class="container is-max-desktop">
+                <div class="hero-body">
+                  <video id="teaser" autoplay muted loop playsinline height="50%">
+                    <source src="./static/videos/PrefCLM_V2_locomotion2.mp4" type="video/mp4">
+                  </video>
+                  <h2 class="subtitle has-text-centered">
+                    <span class="dnerf">
+                  </h2>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+            <p></p>
+            <p>We conducted ablation studies to investigate the impact of crowdsourcing and DST fusion mechanisms within
+              our framework. The ablation results below demonstrate the benefits of our crowdsourcing approach and the
+              effectiveness of DST fusion in managing complexities and conflicts among LLM agents.
+            </p>
+            <img src="static/images/prefCLM_ablation.PNG">
+            <p></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Results. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h3 class="title is-3">Real World User Study: Experiments & Results</h3>
+          <div class="content has-text-justified">
+            <p>
+              To assess PrefCLM's ability to personalize robot behaviors and enhance user satisfaction in realistic
+              human-robot interaction scenarios,
+              we conducted a user study with 10 participants on a robotic feeding task.
+              We compared PrefCLM (equipped with our Human-In-The-Loop module) against PrefEVO and a pre-trained
+              baseline policy.
+            </p>
 
-<section class="section">
-  <div class="container is-max-desktop content">
-    <h3 class="title">Acknowledgement</h3>
-    <p>We thank the participants that contributed to the human evaluation tests.</p>
-  </div>
-</section>
+            <p>We focused on a robotic feeding task using a Kinova Jaco assistive arm, equipped with a RealSense D435
+              camera for face tracking. The setup closely mirrored our simulation environment to minimize the
+              sim-to-real gap, with an emergency switch in place for safety.
+              We recruited 10 participants (3 female, 7 male) with an average age of 24.5 years. The study began with
+              participants expressing their initial expectations for the task. We then fine-tuned policies in
+              simulation, incorporating periodic real-world rollouts. Participants provided feedback during this
+              process, which we used to refine the evaluation functions.
+              For the final evaluation, participants interacted with three different policies in a randomized order:
+              PrefCLM with our Human-In-The-Loop module, PrefEVO, and a pre-trained baseline. After each interaction,
+              participants rated their overall satisfaction and perceived personalization on a 1-5 Likert scale. We also
+              conducted semi-structured interviews to gather qualitative feedback.</p>
+            <section class="hero teaser">
+              <div class="container is-max-desktop">
+                <div class="hero-body">
+                  <video id="teaser" autoplay muted loop playsinline height="50%">
+                    <source src="./static/videos/PrefCLM_V2_Adaptation_trm2.mp4" type="video/mp4">
+                  </video>
+                  <h2 class="subtitle has-text-centered">
+                    <span class="dnerf">
+                  </h2>
+                </div>
+              </div>
+            </section>
+            <p>Results from our analysis showed the following key findings:</p>
+            <ol type="a">
+              <li>PrefCLM achieved higher user satisfaction and personalization ratings compared to baselines</li>
+              <li>Qualitative feedback from the participants indicated that PrefCLM produced more natural and
+                personalized robot behaviors</li>
+            </ol>
+            <p></p>
+            <section class="hero teaser">
+              <div class="container is-max-desktop">
+                <div class="hero-body">
+                  <video id="teaser" autoplay muted loop playsinline height="50%">
+                    <source src="./static/videos/PrefCLM_V2 - user_study2.mp4" type="video/mp4">
+                  </video>
+                  <h2 class="subtitle has-text-centered">
+                    <span class="dnerf">
+                  </h2>
+                </div>
+              </div>
+            </section>
+            <p></p>
+            <p>Participants noted that the robot's behaviors under PrefCLM felt more natural and adaptive to their
+              individual preferences. This study demonstrated PrefCLM's ability to effectively personalize robot
+              behaviors and enhance user satisfaction in a realistic human-robot interaction scenario, highlighting its
+              potential for practical applications in assistive robotics.
+            </p>
+            <img src="static/images/Prefclm_user.PNG">
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h3 class="title">BibTeX</h3>
-    <pre><code>@misc{Wang_Zhao_Yuan_Obi_Min_2024, title={PREFCLM: Enhancing preference-based reinforcement learning with crowdsourced large language models}, url={https://arxiv.org/abs/2407.08213}, journal={arXiv.org}, author={Wang, Ruiqi and Zhao, Dezhong and Yuan, Ziqin and Obi, Ike and Min, Byung-Cheol}, year={2024}, month={Jul}} 
+  <section class="section">
+    <div class="container is-max-desktop content">
+      <h3 class="title">Acknowledgement</h3>
+      <p>We thank the participants that contributed to the human evaluation tests.</p>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h3 class="title">BibTeX</h3>
+      <pre><code>@misc{Wang_Zhao_Yuan_Obi_Min_2024, 
+    title   = {PREFCLM: Enhancing preference-based reinforcement learning with crowdsourced large language models}, 
+    url     = {https://arxiv.org/abs/2407.08213}, 
+    journal = {arXiv.org}, 
+    author  = {Wang, Ruiqi and Zhao, Dezhong and Yuan, Ziqin and Obi, Ike and Min, Byung-Cheol}, 
+    year    = {2024}, 
+    month   = {Jul}
+  } 
 </code></pre>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="#">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="#" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
     </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
-          </p>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="#">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="#" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source
+                code</a> of this website,
+              we just ask that you link back to this page in the footer.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
 </body>
+
 </html>
