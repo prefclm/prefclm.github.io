@@ -1,0 +1,176 @@
+#### Evaluation Function Sample 1 ####
+def evaluate_trajectory(trajectory: Trajectory) -> float:
+    # Weights for different components of the evaluation
+    distance_weight = 0.5
+    y_alignment_weight = 0.3
+    trend_weight = 0.1
+    smoothness_weight = 0.1
+
+    distance_score = 0.0
+    y_alignment_score = 0.0
+    trend_score = 0.0
+    smoothness_score = 0.0
+
+    previous_ee_position = None
+    previous_joint_positions = None
+    previous_joint_velocities = None
+
+    if len(trajectory.states) == 25:
+        a = trajectory.actions[0] == None
+        if type(a) != bool:
+            for i, (state, action, observation) in enumerate(zip(trajectory.states, trajectory.actions, trajectory.observations)):
+                robot = state.robot
+                button = state.button
+
+                # Immediate evaluation: Distance to button
+                distance = np.linalg.norm(robot.ee_position - button.position)
+                distance_score += 1.0 / (1.0 + distance)  # Inverse to give higher scores for smaller distances
+
+                # Immediate evaluation: Y-coordinate alignment
+                y_alignment = 1.0 - abs(robot.ee_position[1] - button.position[1])
+                y_alignment_score += y_alignment
+
+                # Holistic evaluation: Trend analysis
+                if previous_ee_position is not None:
+                    if (robot.ee_position[1] - previous_ee_position[1]) * (button.position[1] - previous_ee_position[1]) > 0:
+                        trend_score += 1.0
+
+                # Holistic evaluation: Movement smoothness
+                if previous_joint_positions is not None and previous_joint_velocities is not None:
+                    joint_position_diff = np.linalg.norm(robot.joint_positions - previous_joint_positions)
+                    joint_velocity_diff = np.linalg.norm(robot.joint_velocities - previous_joint_velocities)
+                    smoothness_score += 1.0 / (1.0 + joint_position_diff + joint_velocity_diff)
+
+                previous_ee_position = robot.ee_position
+                previous_joint_positions = robot.joint_positions
+                previous_joint_velocities = robot.joint_velocities
+
+            # Normalize scores
+            num_steps = len(trajectory)
+            if num_steps > 0:
+                distance_score /= num_steps
+                y_alignment_score /= num_steps
+                trend_score /= num_steps
+                smoothness_score /= num_steps
+
+            # Final score calculation with weights
+            final_score = (distance_weight * distance_score +
+                          y_alignment_weight * y_alignment_score +
+                          trend_weight * trend_score +
+                          smoothness_weight * smoothness_score)
+        else:
+            final_score = 0
+    else:
+        final_score = 0
+
+    return final_score
+
+
+#### Evaluation Function Sample 2 ####
+def evaluate_trajectory(trajectory: Trajectory) -> float:
+    immediate_scores = []
+    holistic_scores = []
+
+    # Immediate evaluation weights
+    weight_tcp_to_obj = 0.4
+    weight_button_pressed = 0.6
+
+    # Holistic evaluation weights
+    weight_success_rate = 0.5
+    weight_efficiency = 0.3
+    weight_stability = 0.2
+
+    # Collect immediate scores
+    if len(trajectory.states) == 25:
+        a = trajectory.actions[0] == None
+        if type(a) != bool:
+            for state, action, observation in zip(trajectory.states, trajectory.actions, trajectory.observations):
+                tcp_to_obj = np.linalg.norm(observation[4:7] - observation[:3])  # Distance from hand to button
+                button_pressed = state['obj_pos'][1] <= 0.78  # Check if the button is pressed
+                immediate_score = (weight_tcp_to_obj * (1 - tcp_to_obj)) + (weight_button_pressed * button_pressed)
+                immediate_scores.append(immediate_score)
+
+            # Calculate holistic scores
+            total_steps = len(trajectory)
+            successful_steps = sum(1 for state in trajectory.states if state['obj_pos'][1] <= 0.78)
+            success_rate = successful_steps / total_steps if total_steps > 0 else 0
+
+            # Efficiency: Inverse of the number of steps taken to complete the task
+            efficiency = 1 / total_steps if total_steps > 0 else 0
+
+            # Stability: Variability in the hand’s position (lower variability means higher stability)
+            hand_positions = np.array([state['hand_pos'] for state in trajectory.states])
+            stability = 1 / np.std(hand_positions) if np.std(hand_positions) > 0 else 0
+
+            holistic_score = (weight_success_rate * success_rate) + (weight_efficiency * efficiency) + (weight_stability * stability)
+
+            # Combine immediate and holistic scores
+            final_score = np.mean(immediate_scores) + holistic_score
+        else:
+            final_score = 0
+    else:
+        final_score = 0
+
+    return final_score
+
+
+#### Evaluation Function Sample 3 ####
+def evaluate_trajectory(trajectory: Trajectory) -> float:
+    # Initializing variables for evaluation
+    total_steps = len(trajectory)
+    if total_steps == 0:
+        return 0.0
+
+    proximity_weight = 0.3
+    force_weight = 0.2
+    smoothness_weight = 0.2
+    completion_weight = 0.3
+
+    total_proximity_score = 0.0
+    total_force_score = 0.0
+    total_smoothness_score = 0.0
+    task_completed = False
+
+    for i in range(total_steps):
+        state = trajectory.states[i]
+        action = trajectory.actions[i]
+        observation = trajectory.observations[i]
+
+        # Extract relevant data
+        ee_position = state.robot.ee_position
+        button_position = state.button.position
+        joint_velocities = state.robot.joint_velocities
+        goal_position = state.button.position
+
+        # Calculate proximity score (closer is better)
+        distance_to_button = np.linalg.norm(ee_position - button_position)
+        proximity_score = max(0, 1 - distance_to_button)  # Closer to button gives higher score
+        total_proximity_score += proximity_score
+
+        # Calculate force score (assume we can check the force applied in some way, here we use placeholder)
+        force_applied = np.linalg.norm(action)  # Assuming action contains force information
+        ideal_force = 1.0  # Placeholder for ideal force value
+        force_score = max(0, 1 - abs(force_applied - ideal_force))
+        total_force_score += force_score
+
+        # Calculate smoothness score (lower joint velocities indicate smoother movement)
+        smoothness_score = max(0, 1 - np.mean(np.abs(joint_velocities)))
+        total_smoothness_score += smoothness_score
+
+        # Check if the task is completed
+        if np.array_equal(ee_position, goal_position):
+            task_completed = True
+
+    # Normalize scores
+    avg_proximity_score = total_proximity_score / total_steps
+    avg_force_score = total_force_score / total_steps
+    avg_smoothness_score = total_smoothness_score / total_steps
+    completion_score = 1.0 if task_completed else 0.0
+
+    # Calculate overall score
+    final_score = (proximity_weight * avg_proximity_score +
+                  force_weight * avg_force_score +
+                  smoothness_weight * avg_smoothness_score +
+                  completion_weight * completion_score)
+
+    return final_score

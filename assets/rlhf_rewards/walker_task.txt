@@ -1,0 +1,243 @@
+#### Evaluation Function Sample 1 ####
+def evaluate_trajectory(trajectory: Trajectory) -> float:
+    def gaussian(x, mu, sigma):
+        return np.exp(-0.5 * ((x - mu) / sigma) ** 2)
+
+    def sigmoid(x, k=1):
+        return 1 / (1 + np.exp(-k * x))
+
+    if len(trajectory.states) == 25:
+        a = trajectory.actions[0] is None
+        if not a:
+            immediate_scores = []
+            stability_scores = []
+            efficiency_scores = []
+            goal_achievement_scores = []
+
+            for i, (state, action) in enumerate(zip(trajectory.states, trajectory.actions)):
+                # Immediate evaluation
+                upright_score = (1 + state['torso_upright']) / 2
+                height_score = gaussian(state['torso_height'], mu=trajectory.task._STAND_HEIGHT, sigma=0.1)
+                action_magnitude = np.linalg.norm(action)
+                action_score = gaussian(action_magnitude, mu=0, sigma=0.5)
+                immediate_score = (
+                    0.4 * upright_score +
+                    0.4 * height_score +
+                    0.2 * action_score
+                )
+                immediate_scores.append(immediate_score)
+
+                # Stability evaluation
+                if i >= 2:
+                    height_changes = [
+                        trajectory.states[j + 1]['torso_height'] - trajectory.states[j]['torso_height']
+                        for j in range(i - 2, i)
+                    ]
+                    upright_changes = [
+                        trajectory.states[j + 1]['torso_upright'] - trajectory.states[j]['torso_upright']
+                        for j in range(i - 2, i)
+                    ]
+                    height_stability = 1 - abs(height_changes[1] - height_changes[0])
+                    upright_stability = 1 - abs(upright_changes[1] - upright_changes[0])
+                    stability_scores.append((height_stability + upright_stability) / 2)
+
+                # Efficiency evaluation
+                if i >= 1:
+                    velocity_change = state['horizontal_velocity'] - trajectory.states[i - 1]['horizontal_velocity']
+                    efficiency_scores.append(gaussian(velocity_change, mu=0, sigma=0.1))
+
+                # Goal achievement evaluation
+                target_speed = trajectory.task._move_speed
+                if target_speed == 0:
+                    stand_score = gaussian(state['torso_height'], mu=trajectory.task._STAND_HEIGHT, sigma=0.1)
+                    upright_score = (1 + state['torso_upright']) / 2
+                    goal_achievement_scores.append((stand_score + upright_score) / 2)
+                else:
+                    goal_achievement_scores.append(gaussian(state['horizontal_velocity'], mu=target_speed, sigma=target_speed / 4))
+
+            # Holistic evaluation
+            overall_stability = np.mean(stability_scores)
+            overall_efficiency = np.mean(efficiency_scores)
+            goal_progression = np.polyfit(range(len(goal_achievement_scores)), goal_achievement_scores, 1)[0]
+            goal_progression_score = sigmoid(goal_progression, k=10)
+            motion_consistency = 1 - np.std(efficiency_scores)
+            task_completion = np.mean(goal_achievement_scores[-10:])
+            holistic_score = (
+                0.2 * overall_stability +
+                0.2 * overall_efficiency +
+                0.2 * goal_progression_score +
+                0.2 * motion_consistency +
+                0.2 * task_completion
+            )
+
+            # Combine immediate and holistic scores
+            final_score = 0.4 * np.mean(immediate_scores) + 0.6 * holistic_score
+        else:
+            final_score = 0
+    else:
+        final_score = 0
+
+    return final_score
+
+
+#### Evaluation Function Sample 2 ####
+def evaluate_trajectory(trajectory: Trajectory) -> float:
+    """
+    Evaluate a given robot trajectory and return an overall score.
+    Higher scores indicate better performance.
+
+    :param trajectory: The Trajectory object containing states, actions, and observations.
+    :return: A single float value representing the overall score.
+    """
+
+    # Define weight constants
+    WEIGHT_UPRIGHT = 1.0
+    WEIGHT_HEIGHT = 0.5
+    WEIGHT_VELOCITY = 1.0
+    WEIGHT_ENERGY = 0.2
+    WEIGHT_STABILITY = 0.8
+    WEIGHT_PROGRESS = 0.5
+
+    # Immediate evaluation variables
+    upright_scores = []
+    height_scores = []
+    velocity_scores = []
+    energy_scores = []
+
+    # Holistic evaluation variables
+    total_distance = 0
+    height_variation = []
+    upright_variation = []
+    target_speed = trajectory.task._move_speed
+    stand_height = _STAND_HEIGHT
+    max_height_threshold = 0.8 * stand_height  # Threshold below which walker is considered fallen
+    previous_state = None
+
+    if len(trajectory.states) == 25:
+        a = trajectory.actions[0] == None
+        if type(a) != bool:
+            for step in range(len(trajectory)):
+                state = trajectory.states[step]
+                action = trajectory.actions[step]
+                observation = trajectory.observations[step]
+
+                # Immediate evaluations
+                torso_upright = state['torso_upright']
+                torso_height = state['torso_height']
+                horizontal_velocity = state['horizontal_velocity']
+
+                # Upright score: closer to 1 is better
+                upright_scores.append(torso_upright)
+
+                # Height score: closer to stand height is better
+                height_scores.append(1 - abs(torso_height - stand_height) / stand_height)
+
+                # Velocity score: closer to target speed is better
+                velocity_scores.append(1 - abs(horizontal_velocity - target_speed) / target_speed)
+
+                # Energy score: lower action magnitudes are better
+                energy_scores.append(1 - np.linalg.norm(action) / np.sqrt(len(action)))
+
+                # Holistic evaluations
+                if previous_state is not None:
+                    distance_travelled = abs(state['horizontal_velocity']) * _CONTROL_TIMESTEP
+                    total_distance += distance_travelled
+                    height_variation.append(torso_height)
+                    upright_variation.append(torso_upright)
+
+                previous_state = state
+
+            # Compute immediate evaluation scores
+            mean_upright_score = np.mean(upright_scores)
+            mean_height_score = np.mean(height_scores)
+            mean_velocity_score = np.mean(velocity_scores)
+            mean_energy_score = np.mean(energy_scores)
+
+            # Compute holistic evaluation scores
+            stability_score = 1 - (np.std(height_variation) / stand_height + np.std(upright_variation)) / 2
+            progress_score = total_distance / (len(trajectory) * _CONTROL_TIMESTEP * target_speed)
+
+            # Calculate overall score with weights
+            final_score = (WEIGHT_UPRIGHT * mean_upright_score +
+                          WEIGHT_HEIGHT * mean_height_score +
+                          WEIGHT_VELOCITY * mean_velocity_score +
+                          WEIGHT_ENERGY * mean_energy_score +
+                          WEIGHT_STABILITY * stability_score +
+                          WEIGHT_PROGRESS * progress_score)
+        else:
+            final_score = 0
+    else:
+        final_score = 0
+
+    return final_score
+
+
+#### Evaluation Function Sample 3 ####
+def evaluate_trajectory(trajectory: 'Trajectory') -> float:
+    """
+    Evaluate the robot’s trajectory and return an overall score.
+
+    Args:
+        trajectory (Trajectory): The trajectory to be evaluated.
+
+    Returns:
+        float: The overall score of the trajectory.
+    """
+
+    # Initialize score components
+    immediate_scores = []
+    total_distance = 0.0
+    total_effort = 0.0
+    last_velocity = None
+    smoothness_penalty = 0.0
+    consistency_penalty = 0.0
+
+    # Define constants for evaluation thresholds and weights
+    TOROS_UPRIGHT_THRESHOLD = 0.8  # Close to fully upright
+    TOROS_HEIGHT_THRESHOLD = 1.0  # Close to the stand height
+    TARGET_VELOCITY = 1.0  # Target walking speed
+    EFFICIENCY_WEIGHT = 0.1  # Weight for efficiency in the overall score
+    SMOOTHNESS_WEIGHT = 0.2  # Weight for smoothness in the overall score
+    FALL_PENALTY = -100.0  # Penalty for falling
+
+    for step in range(len(trajectory)):
+        state = trajectory.states[step]
+        action = trajectory.actions[step]
+        observation = trajectory.observations[step]
+
+        # Immediate evaluation
+        upright_score = max(state['torso_upright'], 0)  # Prefer upright posture
+        height_score = max(0, 1 - abs(state['torso_height'] - trajectory.task._STAND_HEIGHT))
+        speed_score = max(0, 1 - abs(state['horizontal_velocity'] - trajectory.task._move_speed))
+        immediate_score = (upright_score + height_score + speed_score) / 3
+        immediate_scores.append(immediate_score)
+
+        # Holistic evaluation components
+        total_distance += state['horizontal_velocity'] * trajectory.task.control_timestep
+        total_effort += np.sum(np.square(action))
+
+        if last_velocity is not None:
+            smoothness_penalty += np.linalg.norm(state['velocity'] - last_velocity)
+        last_velocity = state['velocity']
+
+        # Consistency in joint orientations
+        consistency_penalty += np.var(observation['orientations'])
+
+    # Holistic evaluation
+    average_immediate_score = np.mean(immediate_scores)
+    efficiency_score = total_distance / (total_effort + 1e-6)  # Avoid division by zero
+    smoothness_score = 1 / (smoothness_penalty + 1e-6)  # Smoothness as inverse of penalty
+    consistency_score = 1 / (consistency_penalty + 1e-6)  # Consistency as inverse of penalty
+
+    final_score = (
+        average_immediate_score +
+        EFFICIENCY_WEIGHT * efficiency_score +
+        SMOOTHNESS_WEIGHT * smoothness_score +
+        (1 - EFFICIENCY_WEIGHT - SMOOTHNESS_WEIGHT) * consistency_score
+    )
+
+    # Penalize for falling
+    if trajectory.states[-1]['torso_height'] < 0.8 * trajectory.task._STAND_HEIGHT:
+        final_score += FALL_PENALTY
+
+    return final_score
